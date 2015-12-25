@@ -2,10 +2,11 @@ package main
 
 import (
     "fmt"
-    "html"
     "log"
     "net/http"
+    "html"
     "time"
+    "encoding/json"
 
     "github.com/gorilla/mux"
 )
@@ -32,7 +33,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func TodoIndex(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintln(w, "TodoIndex!")
+    todos := Todos{
+        Todo{Name: "Estuda Golang"},
+        Todo{Name: "Zerar Dead Space"},
+    }
+
+    json.NewEncoder(w).Encode(todos)
 }
 
 func TodoShow(w http.ResponseWriter, r *http.Request) {
