@@ -5,9 +5,18 @@ import (
     "html"
     "log"
     "net/http"
+    "time"
 
     "github.com/gorilla/mux"
 )
+
+type Todo struct {
+    Name        string
+    Completed   bool
+    Due         time.Time
+}
+
+type Todos []Todo // Cria um novo tipo "Todos", que é um slice de Todo.
 
 func main() {
     router := mux.NewRouter().StrictSlash(true)
