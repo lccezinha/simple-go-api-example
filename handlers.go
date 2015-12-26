@@ -81,3 +81,26 @@ func TodoCreate(w http.ResponseWriter, r *http.Request) {
         panic(err)
     }
 }
+
+func TodoDelete(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    var todoId int
+    var err error
+
+    if todoId, err = strconv.Atoi(vars["todoId"]); err != nil {
+        panic(err)
+    }
+
+    err = RepoDestroyTodo(todoId)
+
+    if err != nil {
+        w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+        w.WriteHeader(http.StatusNotFound)
+        if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
+            panic(err)
+        }
+    } else {
+        w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+        w.WriteHeader(http.StatusNoContent)
+    }
+}
