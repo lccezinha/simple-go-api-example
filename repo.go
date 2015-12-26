@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 var currentId int
-var todos Todo
+var todos Todos
 
 func init() {
     RepoCreateTodo(Todo{Name: "Estudar Golang"})
@@ -12,10 +12,11 @@ func init() {
 
 func generateId() int {
     currentId += 1
+    return currentId
 }
 
-func RepoFindTodoById(id int) Todo {
-    for _, t := todos {
+func RepoFindTodo(id int) Todo {
+    for _, t := range todos {
         if t.Id == id {
             return t
         }
