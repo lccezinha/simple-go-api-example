@@ -1,0 +1,1 @@
+Example from : [The new Stack](http://thenewstack.io/make-a-restful-json-api-go/)
